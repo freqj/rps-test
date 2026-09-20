@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "report-service/**"
+      - ".github/workflows/report-service.yml"
 
 permissions:
   contents: read
