@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: postgres-config
+  namespace: rps-test
+
+data:
+  DB_HOST: postgres
+  DB_PORT: "5432"
+  DB_NAME: report_service
