@@ -33,3 +33,10 @@ jobs:
           file: ./report-service/Dockerfile
           push: true
           tags: ghcr.io/freqj/rps-test:${{ github.sha }}
+  deploy:
+    needs: build
+    runs-on: self-hosted
+
+    steps:
+      - name: Check Kubernetes connection
+        run: kubectl get nodes

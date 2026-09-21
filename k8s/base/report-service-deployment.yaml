@@ -23,10 +23,16 @@ spec:
 
       containers:
         - name: report-service
-          image: ghcr.io/freqj/rps-test:IMAGE_TAG
+          image: ghcr.io/freqj/rps-test:COMMIT_TAG
           ports:
             - containerPort: 8080
 
+          startupProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            periodSeconds: 5
+            failureThreshold: 24
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
