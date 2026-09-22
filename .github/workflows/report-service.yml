@@ -38,5 +38,10 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Check Kubernetes connection
-        run: kubectl get nodes
+      - name: Deploy Report Service
+        run: |
+          kubectl -n rps-test set image deployment/report-service \
+            report-service=ghcr.io/freqj/rps-test:${{ github.sha }}
+
+          kubectl -n rps-test rollout status deployment/report-service \
+            --timeout=120s
