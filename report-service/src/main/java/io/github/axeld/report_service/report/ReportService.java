@@ -25,7 +25,7 @@ public class ReportService {
         return reportRepository.findById(id)
                 .orElseThrow(() -> new ReportNotFoundException(id));
     }
-    @Cacheable(key="all")
+    @Cacheable(value="reports", key="all")
     public List<Report> getAll() {
         return reportRepository.findAll();
     }
