@@ -23,7 +23,7 @@ spec:
 
       containers:
         - name: report-service
-          image: ghcr.io/freqj/rps-test:COMMIT_TAG
+          image: ghcr.io/freqj/rps-test:3b9801b530fc4bcda59f7ba7c8d6de84e36b65dc
           ports:
             - containerPort: 8080
 
