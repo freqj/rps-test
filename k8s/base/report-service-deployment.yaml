@@ -58,6 +58,11 @@ spec:
             - configMapRef:
                 name: report-service-config
           env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: redis-password
+                  key: redis-password
             - name: DB_USER
               valueFrom:
                 secretKeyRef:

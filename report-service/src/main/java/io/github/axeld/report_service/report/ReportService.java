@@ -2,6 +2,7 @@ package io.github.axeld.report_service.report;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +25,7 @@ public class ReportService {
         return reportRepository.findById(id)
                 .orElseThrow(() -> new ReportNotFoundException(id));
     }
-
+    @Cacheable
     public List<Report> getAll() {
         return reportRepository.findAll();
     }
