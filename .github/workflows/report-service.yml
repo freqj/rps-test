@@ -44,4 +44,4 @@ jobs:
             report-service=ghcr.io/freqj/rps-test:${{ github.sha }}
 
           kubectl -n rps-test rollout status deployment/report-service \
-            --timeout=120s
+            --timeout=600s
