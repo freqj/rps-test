@@ -25,15 +25,15 @@ public class ReportController {
     private final ReportService reportService;
 
     @GetMapping
-    public List<ReportResponse> getAll() {
-        return reportService.getAll().stream()
+    public ResponseEntity<List<ReportResponse>> getAll() {
+        return ResponseEntity.ok().body(reportService.getAll().stream()
                 .map(ReportResponse::from)
-                .toList();
+                .toList());
     }
 
     @GetMapping("/{id}")
-    public ReportResponse getById(@PathVariable Long id) {
-        return ReportResponse.from(reportService.getById(id));
+    public ResponseEntity<ReportResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(ReportResponse.from(reportService.getById(id)));
     }
 
     @PostMapping
@@ -51,11 +51,11 @@ public class ReportController {
     }
 
     @PutMapping("/{id}")
-    public ReportResponse update(@PathVariable Long id, @Valid @RequestBody ReportRequest request) {
+    public ResponseEntity<ReportResponse> update(@PathVariable Long id, @Valid @RequestBody ReportRequest request) {
         Report changes = new Report();
         changes.setTitle(request.title());
         changes.setDescription(request.description());
-        return ReportResponse.from(reportService.update(id, changes));
+        return ResponseEntity.ok().body(ReportResponse.from(reportService.update(id, changes)));
     }
 
     @DeleteMapping("/{id}")
