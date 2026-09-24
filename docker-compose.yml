@@ -15,18 +15,33 @@ services:
       timeout: 5s
       retries: 10
 
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
   report-service:
     build: ./report-service
     ports:
       - "8080:8080"
     environment:
+      SPRING_PROFILES_ACTIVE: local
       DB_HOST: postgres
       DB_PORT: 5432
       DB_NAME: report_service
       DB_USER: report_service
       DB_PASSWORD: report_service
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
     depends_on:
       postgres:
+        condition: service_healthy
+      redis:
         condition: service_healthy
 
 volumes:
